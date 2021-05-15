@@ -43,8 +43,13 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "?d=mm&s=40";
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=mm&s=40";
 
+    }
+
+    public function isOwn()
+    {
+        return $this->user_id === auth()->id();
     }
 
     public function conversations()
