@@ -43,7 +43,7 @@
 
                 <!-- Typing area -->
 
-                <livewire:conversations.conversation-reply />
+                <livewire:conversations.conversation-reply/>
 
             </div>
         </div>

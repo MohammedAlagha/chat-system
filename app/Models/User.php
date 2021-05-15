@@ -47,10 +47,7 @@ class User extends Authenticatable
 
     }
 
-    public function isOwn()
-    {
-        return $this->user_id === auth()->id();
-    }
+
 
     public function conversations()
     {

@@ -16,6 +16,11 @@ class Message extends Model
         return $this->belongsTo(Conversation::class);
     }
 
+    public function isOwn()
+    {
+        return $this->user_id === auth()->id();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

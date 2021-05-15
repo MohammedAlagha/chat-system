@@ -16,6 +16,6 @@ class ConversationList extends Component
 
     public function render()
     {
-        return view('livewire.conversation.conversation-list');
+        return view('livewire.conversations.conversation-list');
     }
 }
