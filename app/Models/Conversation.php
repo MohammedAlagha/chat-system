@@ -20,12 +20,20 @@ class Conversation extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class,'conversation_user');
+        return $this->belongsToMany(User::class,'conversation_user')
+            ->withPivot('read_at')
+            ->withTimestamps()
+            ->oldest();
+    }
+
+    public function otherUsers()
+    {
+        $this->users()->where('user_id','!=',auth()->id());
     }
 
     public function messages()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Message::class)->oldest();
     }
 
 

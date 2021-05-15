@@ -43,8 +43,7 @@
 
                 <!-- Typing area -->
 
-                <livewire:conversations.conversation-reply/>
-
+                <livewire:conversations.conversation-reply :conversation="$conversation" />
             </div>
         </div>
     </div>

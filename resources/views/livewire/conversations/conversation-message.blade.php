@@ -1,4 +1,3 @@
-<!-- Sender Message-->
 <div class="media w-50 mb-3"><img
         src="{{$message->user->avatar()}}" alt="user"
         width="50" class="rounded-circle">

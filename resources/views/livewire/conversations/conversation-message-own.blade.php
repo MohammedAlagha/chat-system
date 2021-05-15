@@ -1,4 +1,4 @@
-<!-- Reciever Message-->
+
 <div class="media w-50 ml-auto mb-3">
 
     <div class="media-body">
