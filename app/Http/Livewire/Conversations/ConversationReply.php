@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Conversations;
 
+use App\Events\Conversations\MessageAdded;
 use App\Models\Conversation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -21,16 +22,16 @@ class ConversationReply extends Component
     }
 
     protected $rules = [
-        'body' => 'attachment',
-        'attachment' => 'nullable|files|mimes:png,jpg,jpeg,gif,wav,mp3,mp4|max:102400'
+        'body' => 'nullable',
+       'attachment' => 'nullable|file|mimes:png,jpg,jpeg,gif,wav,mp3,mp4|max:102400'
     ];
 
     public function reply()
     {
         $this->validate();
 
-        if (!is_null($this->attachment)) {
-            $this->attachment_name = hexdec(uniqid()) . $this->attachment->getClientOriginalExtension();
+        if ($this->attachment != "") {
+            $this->attachment_name = hexdec(uniqid()) . $this->attachment->extension();
             $this->attachment->storeAs('/', $this->attachment_name, 'media');
             $data['attachment'] = $this->attachment_name;
         }
@@ -44,12 +45,16 @@ class ConversationReply extends Component
             'last_message_at' => now()
         ]);
 
-        foreach ($this->conversation->otherUser as $user) {
-            $user->conversations()->updateExisitingPivot($this->conversation,[
-                'read-at'=>null
+        foreach ($this->conversation->otherUsers as $user) {
+            $user->conversations()->updateExistingPivot($this->conversation,[
+                'read_at'=>null
             ]);
 
         }
+
+        broadcast(new MessageAdded($message))->toOthers();
+
+        $this->emit('message.created',$message->id);
 
         $this->body = '';
         $this->attachment = '';
