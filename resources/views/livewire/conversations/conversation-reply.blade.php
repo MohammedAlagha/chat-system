@@ -1,5 +1,24 @@
 <form action="#" class="bg-light" x-data="conversationReplyState()" wire:submit.prevent="reply"
       enctype="multipart/form-data">
+
+    @if($attachment)
+        <div class="input-group">
+            <div class="d-inline-flex align-item-center p-1 rounded border">
+                @if(in_array($attachment->extension(),['png','jpg','jpeg','gif']))
+                    <img src="{{$attachment->temporaryUrl()}}" width="80" alt="">
+                @endif
+
+                @if(in_array($attachment->extension(),['wav','mp3']))
+                    <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
+                @endif
+
+                @if(in_array($attachment->extension(),['mp4']))
+                    <i class="fa fa-file-video-o fa-5x" aria-hidden="true"></i>
+                @endif
+            </div>
+        </div>
+    @endif
+
     <div class="input-group">
         <input type="text"
                wire:model="body"
@@ -22,8 +41,7 @@
 </form>
 
 <script>
-    function conversationReplyState()
-    {
+    function conversationReplyState() {
         return {
             attach() {
                 document.getElementById('file_upload').click();

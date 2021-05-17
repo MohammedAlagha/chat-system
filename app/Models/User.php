@@ -49,9 +49,16 @@ class User extends Authenticatable
 
 
 
+
     public function conversations()
     {
         return $this->belongsToMany(Conversation::class, 'conversation_user')
             ->withPivot('read_at');
     }
+
+    public function inConversation($id)
+    {
+        return $this->conversations()->contain($id);
+    }
+
 }

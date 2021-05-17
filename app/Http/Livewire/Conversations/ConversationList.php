@@ -11,7 +11,7 @@ class ConversationList extends Component
 
     public function mount(Collection $conversations)
     {
-        $this->conversations = $conversations;
+        $this->conversations = $conversations->load('messages');
     }
 
     public function render()

@@ -1,6 +1,7 @@
 <div>
     @forelse($conversations as $conversation)
-        <a href="{{route('conversations.show',$conversation->uuid)}}" class="list-group-item list-group-item-action active text-white rounded-0">
+        <a href="{{route('conversations.show',$conversation->uuid)}}"
+           class="list-group-item list-group-item-action active text-white rounded-0">
             <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
                                     alt="{{$conversation->name != '' ? $conversation->name : $conversation->users()->pluck('name')->join(', ')}}"
                                     width="50" class="rounded-circle">
@@ -8,10 +9,10 @@
                     <div class="d-flex align-items-center justify-content-between mb-1">
                         <h6 class="mb-0">
                             {{$conversation->name != '' ? $conversation->name : $conversation->users()->pluck('name')->join(', ')}}
-                        </h6><small class="small font-weight-bold">25 Dec</small>
+                        </h6><small
+                            class="small font-weight-bold">{{Carbon\Carbon::parse($conversation->messages()->first()->created_at)->format('d M')}}</small>
                     </div>
-                    <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                        do eiusmod tempor incididunt ut labore.</p>
+                    <p class="font-italic mb-0 text-small">{{$conversation->messages()->first()->body}}</p>
                 </div>
             </div>
         </a>

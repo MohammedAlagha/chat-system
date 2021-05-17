@@ -18,5 +18,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('conversations.{id}', function ($user, $id) {
-    return true;
+    return $user->inConversation($id);
 });

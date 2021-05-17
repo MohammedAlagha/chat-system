@@ -35,7 +35,7 @@ class ConversationMessages extends Component
     public function mount(Conversation $conversation, Collection $messages)
     {
         $this->conversationId = $conversation->id;
-        $this->messages = $messages;
+        $this->messages = $messages->reverse();
     }
 
     public function render()

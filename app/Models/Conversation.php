@@ -23,7 +23,7 @@ class Conversation extends Model
         return $this->belongsToMany(User::class,'conversation_user')
             ->withPivot('read_at')
             ->withTimestamps()
-            ->oldest();
+            ->latest();
     }
 
     public function otherUsers()
@@ -33,7 +33,7 @@ class Conversation extends Model
 
     public function messages()
     {
-        return $this->hasMany(Message::class)->oldest();
+        return $this->hasMany(Message::class)->latest();
     }
 
 
