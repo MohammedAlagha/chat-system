@@ -61,4 +61,9 @@ class User extends Authenticatable
         return $this->conversations()->contain($id);
     }
 
+    public function hasRead(Conversation $conversation)
+    {
+        return $this->conversations()->find($conversation->id)->pivot->read_at;
+    }
+
 }
