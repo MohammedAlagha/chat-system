@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Conversations;
 
+use App\Models\Conversation;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -12,7 +13,8 @@ class ConversationList extends Component
     public function getListeners()
     {
         return [
-            "echo-private:User.".auth()->id().",Conversations\\ConversationUpdated"=>'UpdatedConversationFromBroadcast'
+            "echo-private:User.".auth()->id().",Conversations\\ConversationUpdated"=>'UpdatedConversationFromBroadcast',
+            "echo-private:User.".auth()->id().",Conversations\\ConversationCreated"=>'CreatedConversationFromBroadcast',
         ];
     }
 
@@ -21,6 +23,11 @@ class ConversationList extends Component
         if ($conversation = $this->conversations->find($payload['conversation']['id'])){
             $conversation->fresh();
         }
+    }
+
+    public function CreatedConversationFromBroadcast($payload)
+    {
+         $this->conversations->prepend(Conversation::find($payload['conversation']['id']));
     }
 
     public function mount(Collection $conversations)
