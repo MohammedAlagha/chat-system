@@ -20,9 +20,12 @@ class ConversationList extends Component
 
     public function UpdatedConversationFromBroadcast($payload)
     {
-        if ($conversation = $this->conversations->find($payload['conversation']['id'])){
-            $conversation->fresh();
+        if (!$this->conversations->contains($payload['conversation']['id'])){
+                $this->conversations->prepend(Conversation::find($payload['conversation']['id']));
+        } else {
+            $this->conversations->find($payload['conversation']['id'])->fresh();
         }
+
     }
 
     public function CreatedConversationFromBroadcast($payload)
@@ -32,7 +35,7 @@ class ConversationList extends Component
 
     public function mount(Collection $conversations)
     {
-        $this->conversations = $conversations->load('messages');
+        $this->conversations = $conversations->reverse()->load('messages') ;
     }
 
     public function render()

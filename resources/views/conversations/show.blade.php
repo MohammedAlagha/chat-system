@@ -20,7 +20,7 @@
             <div class="col-5 px-0">
                 <div class="bg-white">
 
-                    <livewire:conversations.converstion-users :conversation="$conversation" :users="$conversation->users"/>
+                    <livewire:conversations.conversation-users :conversation="$conversation" :users="$conversation->users"/>
 
                     <div class="messages-box">
                         <div class="list-group rounded-0">
