@@ -32,7 +32,7 @@ class ConversationReply extends Component
         $this->validate();
 
         if ($this->attachment != "") {
-            $this->attachment_name = hexdec(uniqid()) . $this->attachment->extension();
+            $this->attachment_name = hexdec(uniqid()) . "." . $this->attachment->extension();
             $this->attachment->storeAs('/', $this->attachment_name, 'media');
             $data['attachment'] = $this->attachment_name;
         }

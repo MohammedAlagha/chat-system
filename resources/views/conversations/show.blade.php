@@ -49,3 +49,15 @@
     </div>
 
 @endsection
+
+@section('script')
+    <script>
+        $(function (){
+            $('.chat-box').stop().animate({
+                scrollTop: $('.chat-box')['0'].scrollHeight
+
+            },500)
+        })
+    </script>
+
+@endsection

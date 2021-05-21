@@ -4,7 +4,7 @@
            class="list-group-item list-group-item-action
            rounded-0 {{\Str::contains(request()->path(),$conversation->uuid)?'active text-white':'list-group-item-light'}}">
 
-            <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+            <div class="media"><img src="https://image.flaticon.com/icons/png/512/2594/2594058.png"
                                     alt="{{$conversation->name != '' ? $conversation->name : $conversation->users()->pluck('name')->join(', ')}}"
                                     width="50" class="rounded-circle">
                 <div class="media-body ml-4">

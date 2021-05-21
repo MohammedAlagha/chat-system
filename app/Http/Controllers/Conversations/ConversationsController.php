@@ -22,6 +22,9 @@ class ConversationsController extends Controller
 
     public function show(Conversation $conversation,Request $request)
     {
+
+        $this->authorize('show',$conversation);
+
         $conversations = $request->user()->conversations;
 
         $request->user()->conversations()->updateExistingPivot($conversation,[

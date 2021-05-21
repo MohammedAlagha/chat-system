@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function inConversation($id)
     {
-        return $this->conversations()->contain($id);
+        return $this->conversations->contains($id);
     }
 
     public function hasRead(Conversation $conversation)
